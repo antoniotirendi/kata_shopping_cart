@@ -13,15 +13,14 @@ class ShoppingCart
   end
 
   def total_price
-    @cart.each do |item, occurrences|
-      while occurrences > 0
-        if item_prices[item * occurrences]
-          @total_price += item_prices[item * occurrences]
-          occurrences = 0
-        else
-          @total_price += item_prices[item]
-          occurrences -= 1
+    @cart.each do |item, total_occurrences|
+      while total_occurrences > 0
+        actual_occurrences = total_occurrences
+        while !item_prices[item * actual_occurrences]
+          actual_occurrences -= 1
         end
+        @total_price += item_prices[item * actual_occurrences]
+        total_occurrences -= actual_occurrences
       end
     end
     @total_price

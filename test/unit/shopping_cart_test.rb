@@ -29,6 +29,10 @@ class ShoppingCartTest < Test::Unit::TestCase
     assert_equal 175, price('AAABB')
   end
 
+  def test_double_special_offer_for_A
+    assert_equal 260, price('AAAAAA')
+  end
+
   def price(items)
     ShoppingCart.new(items).total_price
   end
